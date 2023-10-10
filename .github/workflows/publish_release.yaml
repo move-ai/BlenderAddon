@@ -1,0 +1,55 @@
+name: Publish Release
+
+on:
+  push:
+    branches:
+      - main  # Trigger this action when changes are pushed to the main branch.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Extract Version Info
+      shell: python
+      run: |
+        import os
+        version_file_path = 'pyproject.toml'
+        version = None
+
+        with open(version_file_path, 'r') as f:
+          lines = f.readlines()
+          version_line = [line for line in lines if line.startswith('version = ')][0]        
+          version_str = version_line.split('=')[1].strip().strip('"')
+        
+        if version_str:        
+            print(f'::set-output name=version::{version_str}')
+        else:
+          print("Version not found")
+          exit(1)
+      id: extract_version
+
+    - name: Confirm version
+      run: echo "The version is ${{ steps.extract_version.outputs.version }}"
+
+    - name: Zip Directory
+      run: |
+        zip -r move_ai_fbx_importer.zip move_ai_fbx_importer
+
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          move_ai_fbx_importer.zip
+        tag_name: ${{ steps.extract_version.outputs.version }}
+

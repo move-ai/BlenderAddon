@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "MoveAI FBX Importer Blender Addon"
+version = "1.0.0"
+description = "Use MoveAI outputs in blender using this addon."
+authors = ["MoveAI <info@move.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.11"
+requests = "^2.31.0"
+bpy = { version = "^3.6.0", python = ">=3.10.11,<3.11.dev0" }
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
