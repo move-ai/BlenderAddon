@@ -9,7 +9,7 @@ This is a Blender addon that allows you to import your motion captures generated
 
 ## Installation
 
-1. Download the `move_ai_fbx_importer.zip` file from https://github.com/move-ai/MoveAIBlenderAddon/releases.
+1. Download the `move_ai_fbx_importer.zip` file from https://github.com/move-ai/BlenderAddon/releases 
 2. Open Blender and go to `Edit > Preferences > Add-ons > Install...`.
 3. Navigate to the downloaded zip file and click `Install Add-on`.
 
